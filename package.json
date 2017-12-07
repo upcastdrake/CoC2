@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "webpack-dev-server",
+    "build": "webpack"
   },
   "repository": {
     "type": "git",
@@ -19,7 +21,12 @@
   "homepage": "https://github.com/upcastdrake/CoC2#readme",
   "devDependencies": {
     "@types/react-dom": "^16.0.3",
-    "typescript": "^2.7.0-dev.20171202"
+    "css-loader": "^0.28.7",
+    "style-loader": "^0.19.0",
+    "ts-loader": "^3.2.0",
+    "typescript": "^2.7.0-dev.20171202",
+    "webpack": "^3.9.1",
+    "webpack-dev-server": "^2.9.5"
   },
   "dependencies": {
     "@types/react": "^16.0.25",
