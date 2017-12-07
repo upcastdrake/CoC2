@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-  entry: './src/index.tsx',
+  entry: ['./src/index.tsx', './src/index.css'],
   devtool: 'inline-source-map',
   module: {
     loaders: [
@@ -18,10 +18,10 @@ module.exports = {
       {
       	test: /\.css$/,
  		loader: 'css-loader',
-  		query: {
+  		/*query: {
    			modules: true,
    			localIdentName: '[name]__[local]___[hash:base64:5]'
-  		}
+  		}*/
       }
     ]
   },
