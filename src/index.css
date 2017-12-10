@@ -1,50 +1,89 @@
 body {
-  font: 14px "Century Gothic", Futura, sans-serif;
-  margin: 20px;
+	font: 14px "Times New Roman", Times, serif;
+	background: #C0C0C0;
 }
 
-ol, ul {
-  padding-left: 30px;
+.buttonDock {
+	display: table;
+	height: 25.009%;
+	max-height: 25.009%;
+	width: 61%;
+	bottom: 0;
+	left: 19.5%;
+	margin: 0 auto;
+	position: absolute;
+	background: #C0C0C0; 
 }
 
-.board-row:after {
-  clear: both;
-  content: "";
-  display: table;
+.button-row {
+	display: table-row;
+	width: 100%;
+	height: 33.333%;
+	margin: 0 auto;
 }
 
-.status {
-  margin-bottom: 10px;
+.button {
+	background: #3E3E3E;
+	border-color: #C0C0C0;
+	border-style: solid;
+	font: 14px "Times New Roman", Times, serif;
+	font-weight: bold;
+	height: 100%;
+	text-align: center;
+	color: white;
+	width: 20%;
 }
 
-.square {
-  background: #fff;
-  border: 1px solid #999;
-  float: left;
-  font-size: 24px;
-  font-weight: bold;
-  line-height: 34px;
-  height: 34px;
-  margin-right: -1px;
-  margin-top: -1px;
-  padding: 0;
-  text-align: center;
-  width: 34px;
+.leftSideBar {
+	height: 100%;
+	width: 18.5%;
+	left: 0;
+	top: 0; bottom: 0;
+	position: absolute;
+	background: #3E3E3E; 
 }
 
-.square:focus {
-  outline: none;
+.rightSideBar {
+	height: 100%;
+	width: 18.5%;
+	right: 0;
+	top: 0; bottom: 0;
+	position: absolute;
+	background: #3E3E3E; 
 }
 
-.kbd-navigation .square:focus {
-  background: #ddd;
+.mainText {
+	height: 73.5%;
+	width: 63%;
+	top: 0;
+	left: 18.5%;
+	margin: 0 auto;
+	position: absolute;
+	background: #C0C0C0; 
+	overflow-y:auto;
+}
+
+#mainText {
+	padding: 1%;
+	margin: 0;
 }
 
 .game {
-  display: flex;
-  flex-direction: row;
+	 /* Aspect ratio */
+	/*height:100vm; width:100vm;*/ /* IE9 fallback */
+	width: 100vw; 
+	height: 56.25vw;
+	max-height: 100vh;
+	max-width: 177.7777vh;
+	/*Centering */
+	position: absolute;
+	top:0;bottom:0;
+	left:0;right:0;
+	margin: auto;
+	/* styling */
+	background: #C0C0C0;
 }
 
 .game-info {
-  margin-left: 20px;
+	margin-left: 20px;
 }

@@ -1,108 +1,145 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
+var $ = require('jquery');
 import './index.css';
 
-class Square extends React.Component<{value:string, onClick:any}/*, {value:string}*/> {
-/*  constructor(props) {
-    super(props);
-    this.state = {value:''};
-  }*/
+class Button extends React.Component<{Title:string, Function:any, Show:boolean, Disable:boolean}/*, {value:string}*/> {
+	/*  constructor(props) {
+		super(props);
+		this.state = {value:''};
+	}*/
 
-  render() {
-    return (
-      <button className="square" onClick={() => this.props.onClick()}>
-        {this.props.value}
-      </button>
-    );
-  }
+	render() {
+		return (
+			<button className="button" onClick={() => this.props.Function()}>
+			{this.props.Title}
+			</button>
+		);
+	}
 }
 
-class Board extends React.Component<any, {squares:Array<string>, click:number}> {
-  constructor(props) {
-    super(props);
-    this.state = {squares: Array(9).fill(null), click:0};
-  }
+class LeftSideBar extends React.Component {	
+	render() {
+		return(
+			<div className="leftSideBar">
+				<div>Left Sidebar</div>
+			</div>
+		);
+	}
+}
 
-  handleClick(i:number) {
-    const squares = this.state.squares.slice();
-    if(!squares[i] && !calculateWinner(squares)) {
-      squares[i] = (this.state.click % 2 == 0?'X':'O');
-      this.setState({squares:squares});
-      this.setState({click:this.state.click+1});
-     }
-  }
+class MainText extends React.Component <any, {text:string}>{
+	constructor(props) {
+		super(props);
+		this.state = {text: this.props.text};
+	}
+	
+	render () {
+		return (
+			<div className="mainText">
+				<p id="mainText">{this.state.text}</p>
+			</div>
+		);	
+	}
+}
 
-  renderSquare(i:number) {
-    return <Square value={this.state.squares[i]} onClick={() => this.handleClick(i)}/>;
-  }
+class ButtonDock extends React.Component <any, any>{
+	constructor(props) {
+		super(props);
+		this.state = {	Title: Array(15).fill(null), 
+						ToolTitle: Array(15).fill(null), 
+						Tooltip: Array(15).fill(null), 
+						Function: Array(15).fill(clearOutput), 
+						Show: Array(15).fill(null), 
+						Disable: Array(15).fill(null)
+					};
+	}
+	
+	renderButton(i:number) {
+		return <Button Title={String(i)} Function={this.state.Function[i]} Show={true} Disable={false}/>;
+	}
+	
+	render() {
+		return(
+			<div className="buttonDock">
+				<div className="button-row">
+				{this.renderButton(0)}
+				{this.renderButton(1)}
+				{this.renderButton(2)}
+				{this.renderButton(3)}
+				{this.renderButton(4)}
+				</div>
+				<div className="button-row">
+				{this.renderButton(5)}
+				{this.renderButton(6)}
+				{this.renderButton(7)}
+				{this.renderButton(8)}
+				{this.renderButton(9)}
+				</div>
+				<div className="button-row">
+				{this.renderButton(10)}
+				{this.renderButton(11)}
+				{this.renderButton(12)}
+				{this.renderButton(13)}
+				{this.renderButton(14)}
+				</div>
+			</div>
+		);
+	}
+}
 
-  render() {
-    var status = '';
-    if(!calculateWinner(this.state.squares)) status = 'Next player: '+(this.state.click % 2 == 0?'X':'O');
-    else status = 'Winner: '+ calculateWinner(this.state.squares);
-
-    return (
-      <div>
-        <div className="status">{status}</div>
-        <div className="board-row">
-          {this.renderSquare(0)}
-          {this.renderSquare(1)}
-          {this.renderSquare(2)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(3)}
-          {this.renderSquare(4)}
-          {this.renderSquare(5)}
-        </div>
-        <div className="board-row">
-          {this.renderSquare(6)}
-          {this.renderSquare(7)}
-          {this.renderSquare(8)}
-        </div>
-      </div>
-    );
-  }
+class RightSideBar extends React.Component {
+	render() {
+		return(
+			<div className="rightSideBar">
+				<div>Right Sidebar</div>
+			</div>
+		);
+	}
 }
 
 class Game extends React.Component {
-  render() {
-    return (
-      <div className="game">
-        <div className="game-board">
-          <Board />
-        </div>
-        <div className="game-info">
-          <div>{/* status */}</div>
-          <ol>{/* TODO */}</ol>
-        </div>
-      </div>
-    );
-  }
+	render() {
+		return (
+			<div className="game">
+				<LeftSideBar />
+				<MainText text={"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."} />
+				<ButtonDock />
+				<RightSideBar />
+			</div>
+		);
+	}
 }
 
 // ========================================
 
 ReactDOM.render(
-  <Game />,
-  document.getElementById('root')
+	<Game />,
+	document.getElementById('root')
 );
 
-function calculateWinner(squares:Array<string>):string {
-  const lines = [
-    [0, 1, 2],
-    [3, 4, 5],
-    [6, 7, 8],
-    [0, 3, 6],
-    [1, 4, 7],
-    [2, 5, 8],
-    [0, 4, 8],
-    [2, 4, 6],
-  ];
-  for (let i = 0; i < lines.length; i++) {
-    const [a, b, c] = lines[i];
-    if (squares[a] && squares[a] === squares[b] && squares[a] === squares[c]) {
-      return squares[a];
-    }
-  }
-  return '';
+function fontsize(){
+	var fontSize = ($(".game").width() + $(".game").height()*.104)*.015;
+	$(".game").css("font-size", fontSize);
+	$(".button").css("font-size", fontSize);
+}
+
+function buttonBorders(){
+	var borderSize = $(".button-row").height()/10;
+	if(borderSize > $(".game").height()/120) borderSize = $(".game").height()/120;
+	$(".button").css("border-width", borderSize);
+	$(".button").css("border-radius", borderSize*2.3);
+}
+
+$(document).ready(function () {
+    fontsize();
+    buttonBorders();
+    $(window).resize(function() {
+        fontsize();
+        buttonBorders();
+    });
+});
+
+function clearOutput(){
+	$("#mainText").setState({text:"test"});
 }

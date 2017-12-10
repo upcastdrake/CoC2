@@ -2,7 +2,7 @@
   "name": "TS.React",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "index.html",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "webpack-dev-server",
@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/upcastdrake/CoC2#readme",
   "devDependencies": {
+    "@types/jquery": "^3.2.16",
     "@types/react-dom": "^16.0.3",
     "css-loader": "^0.28.7",
     "style-loader": "^0.19.0",
@@ -30,6 +31,7 @@
   },
   "dependencies": {
     "@types/react": "^16.0.25",
+    "jquery": "^3.2.1",
     "react": "^16.2.0",
     "react-dom": "^16.2.0"
   }
