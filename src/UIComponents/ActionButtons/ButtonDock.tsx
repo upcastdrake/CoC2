@@ -7,10 +7,10 @@ export class ButtonDock extends React.Component <any, any>{
     }
 
     renderButton(i:number) {
-        return <Button 	title={this.props.buttons.title[i]}
-                          doClick={this.props.buttons.func[i]}
-                          show={this.props.buttons.show[i]}
-                          disable={this.props.buttons.disable[i]}/>;
+        return <Button 	title={this.props.buttons[i].title}
+                          doClick={this.props.buttons[i].func}
+                          show={this.props.buttons[i].show}
+                          disable={this.props.buttons[i].disable}/>;
     }
 
     render() {

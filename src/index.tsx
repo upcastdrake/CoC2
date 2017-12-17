@@ -3,6 +3,7 @@ import * as ReactDOM from 'react-dom';
 var $ = require('jquery');
 import './index.css';
 import {Game} from "./UIComponents/Game";
+import {GameStart} from "./GameData/creation";
 
 // ========================================
 
@@ -31,4 +32,5 @@ $(document).ready(function () {
         fontsize();
         buttonBorders();
     });
+    GameStart.StartIntro();
 });

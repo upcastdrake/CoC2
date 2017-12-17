@@ -48,18 +48,6 @@ body {
 	width: 20%;
 }
 
-/*.hiddenButton {
-	background: #8C8C8C;
-	border-color: #C0C0C0;
-	border-style: solid;
-	font: 14px "Times New Roman", Times, serif;
-	font-weight: bold;
-	height: 100%;
-	text-align: center;
-	color: #8C8C8C;
-	width: 20%;
-}*/
-
 .leftSideBar {
 	height: 100%;
 	width: 18.5%;
@@ -92,6 +80,7 @@ body {
 #mainText {
 	padding: 1%;
 	margin: 0;
+    white-space: pre-line;
 }
 
 .game {
