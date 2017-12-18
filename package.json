@@ -27,12 +27,15 @@
     "ts-loader": "^3.2.0",
     "typescript": "^2.7.0-dev.20171202",
     "webpack": "^3.9.1",
-    "webpack-dev-server": "^2.9.5"
+    "webpack-dev-server": "^2.9.5",
+    "react-native-htmlview": "^0.12.1"
   },
   "dependencies": {
     "@types/react": "^16.0.25",
+    "class-autobind": "^0.1.4",
     "jquery": "^3.2.1",
     "react": "^16.2.0",
-    "react-dom": "^16.2.0"
+    "react-dom": "^16.2.0",
+    "react-native-htmlview": "^0.12.1"
   }
 }

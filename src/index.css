@@ -80,7 +80,8 @@ body {
 #mainText {
 	padding: 1%;
 	margin: 0;
-    white-space: pre-line;
+    white-space: pre-wrap;
+	overflow-wrap: break-word;
 }
 
 .game {

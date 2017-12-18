@@ -7,73 +7,46 @@ import {RightSideBar} from "./RightSideBar/RightSideBar";
 export class Game extends React.Component <any, any>{
     constructor(props) {
         super(props);
-        this.clearOutput = this.clearOutput.bind(this);
-        this.output = this.output.bind(this);
 
         this.state = {
-            buttons: [  {title:"0", func:this.clearOutput},
-                        {title:"1", func:this.clearOutput},
-                        {title:"2", func:this.clearOutput, show: true, disable: false},
-                        {title:"3", func:this.clearOutput},
-                        {title:"4", func:this.clearOutput},
-                        {title:"5", func:this.clearOutput},
-                        {title:"6", func:this.clearOutput},
-                        {title:"7", func:this.clearOutput},
-                        {title:"8", func:this.clearOutput},
-                        {title:"9", func:this.clearOutput},
-                        {title:"10", func:this.clearOutput},
-                        {title:"11", func:this.clearOutput},
-                        {title:"12", func:this.clearOutput},
-                        {title:"13", func:this.clearOutput},
-                        {title:"14", func:this.clearOutput}
+            buttons: [  {title:"0", func:undefined},
+                        {title:"1", func:undefined},
+                        {title:"2", func:undefined, show: false, disable: false},
+                        {title:"3", func:undefined},
+                        {title:"4", func:undefined},
+                        {title:"5", func:undefined},
+                        {title:"6", func:undefined},
+                        {title:"7", func:undefined},
+                        {title:"8", func:undefined},
+                        {title:"9", func:undefined},
+                        {title:"10", func:undefined},
+                        {title:"11", func:undefined},
+                        {title:"12", func:undefined},
+                        {title:"13", func:undefined},
+                        {title:"14", func:undefined}
             ],
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         };
     }
 
-    clearOutput() {
-        this.setState({text: ""});
-        console.log("game.state.text: \""+this.state.text+"\"");
-    }
-
-    output(text:string) {
-        let copy:string = this.state.text;
-        //Fix newlines
-        text.replace(/\n/g, String.fromCharCode(13, 10));
-        //append new output
-        copy += text;
-        //update UI
-        this.setState({text: copy});
-    }
-
     //Mega-Function that does EVERYTHING!!
     componentWillReceiveProps(nextProps) {
-        //Process any button
-        if(nextProps.bidx != undefined && nextProps.bidx <= 14) {
-            let idx = nextProps.bidx;
-            let buttons = this.state.buttons.slice();
-            buttons[idx].title = nextProps.btext;
-            buttons[idx].toolTitle = nextProps.bttH;
-            buttons[idx].toolTip = nextProps.bttB;
-            buttons[idx].func = nextProps.bf;
-            buttons[idx].args = nextProps.bargs;
-            buttons[idx].show = nextProps.bshow;
-            buttons[idx].disable = nextProps.bdisable;
-            this.setState({buttons: buttons});
-        }
-        //Process Main text changes
-        if(nextProps.mtext != undefined) {
-            let text = this.state.text;
-            text += nextProps.mtext;
-            this.setState({text: text});
-        }
-
+        //Handle main text
+        this.setState({text: (nextProps.state.txtClr ? '' : this.state.text) + nextProps.state.text});
+        //Handle buttons
+        var buttons = Array(15);
+        if(nextProps.state.btnClr) buttons.fill({title:"", func:undefined, show:false, disable:false});
+        else buttons = this.state.buttons.slice();
+        //console.log('Game.componentProps: '+JSON.stringify(buttons));
+        for(let i = 0; i < nextProps.state.buttons.length; i++) if(nextProps.state.buttons[i]) buttons[i] = nextProps.state.buttons[i];
+        //console.log('Game.componentProps: '+JSON.stringify(buttons));
+        this.setState({buttons: buttons});
     }
 
     render() {
         const text = this.state.text;
         const buttons = this.state.buttons;
-
+        //console.log('Game.render: '+JSON.stringify(buttons));
         return (
             <div className="game">
                 <LeftSideBar />

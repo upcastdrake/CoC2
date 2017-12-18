@@ -5,6 +5,10 @@ export class MainText extends React.Component <{text:string}>{
         super(props);
     }
 
+    componentDidUpdate() {
+        document.getElementsByClassName("mainText")[0].scrollTop = 0;
+    }
+
     render () {
         return (
             <div className="mainText">

@@ -2,30 +2,43 @@ import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Game} from "../UIComponents/Game";
 
-//Functions that interact with the UI
+//Interface State models Game UI component state
 export class Interface {
+    state = {
+        buttons: [],
+        text: '',
+        btnClr: false,
+        txtClr: false
+    };
 
-    static addButton(idx:number, text:string = null, f:Function = null, args:any = undefined, ttH:string = null, ttB:string = null) {
-        ReactDOM.render(
-            <Game bidx={idx} btext={text} bf={f} bargs={args} bttH={ttH} bttB={ttB} bshow={true} bdisable={false}/>,
-            document.getElementById('root')
-        );
+    addButton(idx:number, text:string = undefined, f:Function = undefined, args:any = undefined, ttH:string = undefined, ttB:string = undefined) {
+        if(idx <= 14) this.state.buttons[idx] = {title:text, func:f, args:args, ttH:ttH, ttB:ttB, show:true, disable:false};
+        //console.log('Interface.addButton: '+JSON.stringify(this.state.buttons[idx]));
     }
 
-    static addDisabledButton(idx:number, text:string = null, ttH:string = null, ttB:string = null) {
-        ReactDOM.render(
-            <Game bidx={idx} btext={text} bf={null} bargs={null} bttH={ttH} bttB={ttB} bshow={true} bdisable={true}/>,
-            document.getElementById('root')
-        );
+    addDisabledButton(idx:number, text:string = undefined, ttH:string = undefined, ttB:string = undefined) {
+        this.state.buttons[idx] = {title:text, ttH:ttH, ttB:ttB, show:true, disable:true};
     }
 
-    static output(text:string = "\n\n") {
+    clearMenu() {
+        this.state.buttons = [];
+        this.state.btnClr = true;
+    }
+
+    output(text:string = "\n\n") {
         text.replace(/\n/g, "<br>");
+        this.state.text += text;
+    }
+
+    clearOutput() {
+        this.state.text = '';
+        this.state.txtClr = true;
+    }
+
+    render() {
         ReactDOM.render(
-            <Game mtext={text}/>,
+            <Game state={this.state}/>,
             document.getElementById('root')
         );
     }
-
-
 }
