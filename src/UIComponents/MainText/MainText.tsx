@@ -12,7 +12,7 @@ export class MainText extends React.Component <{text:string}>{
     render () {
         return (
             <div className="mainText">
-                <p id="mainText">{this.props.text}</p>
+                <p id="mainText" dangerouslySetInnerHTML={{__html: this.props.text}}/>
             </div>
         );
     }
