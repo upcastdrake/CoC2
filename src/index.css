@@ -5,8 +5,8 @@ body {
 
 .buttonDock {
 	display: table;
-	height: 25.009%;
-	max-height: 25.009%;
+	height: 22%;
+	max-height: 22%;
 	width: 61%;
 	bottom: 0;
 	left: 19.5%;
@@ -57,6 +57,14 @@ body {
 	background: #3E3E3E; 
 }
 
+.leftSideTabs {
+	height: 100%;
+	width: 10%;
+	left: 100%;
+	position: absolute;
+	background: fuchsia;
+}
+
 .rightSideBar {
 	height: 100%;
 	width: 18.5%;
@@ -66,15 +74,24 @@ body {
 	background: #3E3E3E; 
 }
 
+.rightSideTabs {
+	height: 100%;
+	width: 10%;
+	right: 100%;
+	position: absolute;
+	background: fuchsia;
+}
+
 .mainText {
-	height: 73.5%;
-	width: 63%;
+	height: 76.5%;
+	width: 59.3%;
 	top: 0;
-	left: 18.5%;
+	left: 20.35%;
 	margin: 0 auto;
 	position: absolute;
 	background: #C0C0C0; 
 	overflow-y:auto;
+	line-height: 1.1;
 }
 
 #mainText {

@@ -32,15 +32,18 @@ export class Game extends React.Component <any, any>{
     //Mega-Function that does EVERYTHING!!
     componentWillReceiveProps(nextProps) {
         //Handle main text
-        this.setState({text: (nextProps.state.txtClr ? '' : this.state.text) + nextProps.state.text});
+        if(nextProps.state.text)
+            this.setState({text: (nextProps.state.txtClr ? '' : this.state.text) + nextProps.state.text});
         //Handle buttons
-        var buttons = Array(15);
-        if(nextProps.state.btnClr) buttons.fill({title:"", func:undefined, show:false, disable:false});
-        else buttons = this.state.buttons.slice();
-        //console.log('Game.componentProps: '+JSON.stringify(buttons));
-        for(let i = 0; i < nextProps.state.buttons.length; i++) if(nextProps.state.buttons[i]) buttons[i] = nextProps.state.buttons[i];
-        //console.log('Game.componentProps: '+JSON.stringify(buttons));
-        this.setState({buttons: buttons});
+        if(nextProps.state.buttons) {
+            var buttons = Array(15);
+            if (nextProps.state.btnClr) buttons.fill({title: "", func: undefined, show: false, disable: false});
+            else buttons = this.state.buttons.slice();
+            //console.log('Game.componentProps: '+JSON.stringify(buttons));
+            for (let i = 0; i < nextProps.state.buttons.length; i++) if (nextProps.state.buttons[i]) buttons[i] = nextProps.state.buttons[i];
+            //console.log('Game.componentProps: '+JSON.stringify(buttons));
+            this.setState({buttons: buttons});
+        }
     }
 
     render() {
@@ -51,8 +54,8 @@ export class Game extends React.Component <any, any>{
             <div className="game">
                 <LeftSideBar />
                 <MainText text={text} />
-                <ButtonDock buttons={buttons}/>
                 <RightSideBar />
+                <ButtonDock buttons={buttons}/>
             </div>
         );
     }

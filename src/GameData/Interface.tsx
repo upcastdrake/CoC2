@@ -42,3 +42,5 @@ export class Interface {
         );
     }
 }
+var ui:Interface = new Interface();
+export {ui};
