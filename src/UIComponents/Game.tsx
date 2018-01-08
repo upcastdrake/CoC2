@@ -25,6 +25,7 @@ export class Game extends React.Component <any, any>{
                         {title:"13", func:undefined},
                         {title:"14", func:undefined}
             ],
+            textInputDefault: {},
             text: "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum. Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."
         };
     }
@@ -32,8 +33,10 @@ export class Game extends React.Component <any, any>{
     //Mega-Function that does EVERYTHING!!
     componentWillReceiveProps(nextProps) {
         //Handle main text
-        if(nextProps.state.text)
+        if(nextProps.state.text) {
             this.setState({text: (nextProps.state.txtClr ? '' : this.state.text) + nextProps.state.text});
+            this.setState({textInputDefault: nextProps.state.textInputDefault});
+        }
         //Handle buttons
         if(nextProps.state.buttons) {
             var buttons = Array(15);
@@ -49,11 +52,12 @@ export class Game extends React.Component <any, any>{
     render() {
         const text = this.state.text;
         const buttons = this.state.buttons;
+        const textInputDefault = this.state.textInputDefault;
         //console.log('Game.render: '+JSON.stringify(buttons));
         return (
             <div className="game">
                 <LeftSideBar />
-                <MainText text={text} />
+                <MainText text={text} input={textInputDefault}/>
                 <RightSideBar />
                 <ButtonDock buttons={buttons}/>
             </div>

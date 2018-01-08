@@ -82,7 +82,7 @@ body {
 	background: fuchsia;
 }
 
-.mainText {
+.mainTextContainer {
 	height: 76.5%;
 	width: 59.3%;
 	top: 0;
@@ -94,11 +94,17 @@ body {
 	line-height: 1.1;
 }
 
-#mainText {
+.mainText {
 	padding: 1%;
 	margin: 0;
     white-space: pre-wrap;
 	overflow-wrap: break-word;
+	display: block;
+}
+
+.textInput {
+	margin-left: 1%;
+
 }
 
 .game {

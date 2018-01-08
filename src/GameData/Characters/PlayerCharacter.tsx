@@ -6,5 +6,6 @@ export class PlayerCharacter extends Creature {
 
 
 }
+
 var pc:PlayerCharacter = new PlayerCharacter();
 export {pc};

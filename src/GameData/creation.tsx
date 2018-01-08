@@ -4,6 +4,8 @@ export function StartIntro():void {
     _.flags["KYS_RETARD"] = true;
     _.ui.clearOutput();
     _.ui.output("This is a test. The PC's name is: " + _.pc.name);
+    _.pc.name = "Abacus";
+    _.ui.output("\n\nThe PC's name is now: " + _.pc.name);
     _.ui.output("\n\nThere are many, many worlds.");
     _.ui.output("\n\nOne, called Mareth, was perhaps the heart of them all. Cracks in the space between worlds, called portals, all seemed to lead there. Through one of these cracks fell a group of human mages who thought themselves as mighty as the gods. Yet even with all their power, the mages could not return them to their homeworld. Many portals led to Mareth, but none left it.");
     _.ui.output("\n\nThe mages never stopped trying to find a way home, and as the years passed, their experiments became ever more obscene. The mages were twisted and corrupted by their own desires, and the taint of their black magics spread across Mareth like wildfire. They became <b>demons</b>, shedding their humanity at the command of their new queen, Lethice.");
@@ -17,13 +19,48 @@ export function StartIntro():void {
 
 export function StartII():void {
     _.ui.clearOutput();
-    _.ui.output("This is a test. flags['KYS_RETARD']: " + _.flags["KYS_RETARD"]);
+    _.ui.output("This is a test. flags['KYS_RETARD']: " + _.flags["KYS_RETARD"] + " The PC's name is: " + _.pc.name);
     _.ui.output("\n\nYou have never heard of a world called Mareth, nor a village named Ingnam.");
     _.ui.output("\n\nNearly a year ago, you set off on your own, leaving your former life behind to seek your fortunes on the wild frontier -- a year of traveling, exploring, fighting, and surviving alone. You've earned yourself a little coin in your travels, enough to book passage to the furthest reaches of the known world: the Frost Marches.");
     _.ui.output("\n\nYou had just made it to the village of Hawkethorne, a little hamlet nestled between a range of craggy mountains in the east and the endless forests of the north, when the weather turned foul. What started as an autumn downpour has turned into an unseasonable snowstorm, several months earlier than you'd expected first snow. The snow has come down harder and harder in the last few days, building up to a furious storm that's made continuing your journey risky proposition. Lucky for you, the tavern in town -- a little place called the Frost Hound -- had several rooms for let.");
     _.ui.output("\n\nA towering old wolf-man named Garth runs the place along with his daughter Gwyneth, the serving girl. She's pregnant, mere days from being due she says, and is the most cheerful person you've seen so far in the wintery town. Her father is gruff and speaks little, but the two of them are your only company most days. At night, a few of the local shopkeepers and traders will come in for a drink, but the storm makes even small ventures down the dirt-packed road a less than appealing proposition.");
     _.ui.output("\n\nIt’s been a quiet, lonely couple of days that lend themselves to contemplation about the year you’ve spent on the road, and the life you left behind...");
+    _.ui.output("\n\nEnter Name (Must be 3-12 letters):");
+    _.ui.addMainTextInput();
+    _.ui.addButton(0, "Next", () => ProcessName());
+    _.ui.render();
+}
+
+export function ProcessName():void {
+    if(/[a-zA-Z]{3,12}/.test(_.ui.readMainTextInput())) {
+        _.pc.name = _.ui.readMainTextInput();
+        _.ui.clearOutput();
+        _.ui.output("Name has been set to: " + _.pc.name);
+        _.ui.addButton(0, "Next", () => FunWithBoxes());
+    }
+    else _.ui.addButton(0, "TryAgain", () => ProcessName());
+    _.ui.render();
+}
+
+export function FunWithBoxes():void {
+    _.ui.clearOutput();
+    _.ui.addMainTextInput();
+    _.ui.output("I am text after a text-input.");
+    _.ui.addMainTextInput();
+    _.ui.output("I am text after a text-input.");
+    _.ui.addMainTextInput();
+    _.ui.output("I am text after a text-input.");
     _.ui.clearMenu();
-    _.ui.addButton(0, "Next");
+    _.ui.addButton(0, "Next", () => ResolveFun());
+    console.log(_.ui.state.textInputDefault);
+    _.ui.render();
+}
+
+export function ResolveFun():void {
+    _.ui.output("\n\nYou just entered: ");
+    _.ui.output("\n\n" + _.ui.readMainTextInput(0));
+    _.ui.output("\n\n" + _.ui.readMainTextInput(1));
+    _.ui.output("\n\n" + _.ui.readMainTextInput(2));
+    _.ui.clearMenu();
     _.ui.render();
 }

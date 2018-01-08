@@ -1,14 +1,16 @@
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import {Game} from "../UIComponents/Game";
+var $ = require('jquery');
 
-//Interface State models Game UI component state
+//Interface-State models Game-UI-component-state
 export class Interface {
     state = {
         buttons: [],
         text: '',
         btnClr: false,
-        txtClr: false
+        txtClr: false,
+        textInputDefault: []
     };
 
     addButton(idx:number, text:string = undefined, f:Function = undefined, args:any = undefined, ttH:string = undefined, ttB:string = undefined) {
@@ -33,6 +35,17 @@ export class Interface {
     clearOutput() {
         this.state.text = '';
         this.state.txtClr = true;
+        this.state.textInputDefault = [];
+    }
+
+    addMainTextInput(defaultText = '') {
+        this.state.text += '[textBox]';
+        this.state.textInputDefault.push(defaultText);
+    }
+
+    readMainTextInput(idx = 0):string {
+        console.log(document.getElementById("textInput"+idx));
+        return (document.getElementById("textInput"+idx) as HTMLInputElement).value;
     }
 
     render() {
